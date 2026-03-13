@@ -37,6 +37,13 @@
         setTimeout(createSnowflake, i * 200);
     }
 
+// Efecto Fidget: Las estrellas siguen sutilmente el movimiento
+document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 20;
+    const y = (e.clientY / window.innerHeight) * 20;
+    document.querySelector('.space-1').style.transform = `translate(${x}px, ${y}px)`;
+});
+
 const generateSpaceLayer = (size, selector) => {
   const layer = [];
   const totalStars = 200;
@@ -212,3 +219,55 @@ audio.addEventListener("ended", () => {
     // mensaje final
     contenedorMensaje.innerText = "Feliz cumpleaños, Ceci 💖";
 });
+
+const audioFondo = document.getElementById('musica');
+const escenaContenedor = document.querySelector('.escena');
+let climaxActivado = false; // Candado para que no se repita el código mil veces
+
+if (audioFondo) {
+    // timeupdate se ejecuta constantemente mientras la canción suena
+    audioFondo.addEventListener('timeupdate', () => {
+        
+        // Si llegamos al segundo 133 y el clímax no se ha activado
+        if (audioFondo.currentTime >= 133 && !climaxActivado) {
+            climaxActivado = true;
+            iniciarMagiaLover();
+        }
+    });
+}
+
+function iniciarMagiaLover() {
+    console.log("¡Iniciando puente de Lover!");
+
+    // Esto ahora activará el ::before de forma suave gracias al CSS de arriba
+    escenaContenedor.classList.add('climax-lover');
+
+    // El resto de tu código (borrar copos, crear luciérnagas) se queda igual
+    document.querySelectorAll('.snowflake').forEach(copo => {
+        copo.style.transition = "opacity 3s ease"; 
+        copo.style.opacity = "0";
+        setTimeout(() => copo.remove(), 3000);
+    });
+
+    // 3. Crear las luciérnagas poco a poco
+    const totalLuciernagas = 40;
+    for (let i = 0; i < totalLuciernagas; i++) {
+        setTimeout(() => {
+            crearLuciernaga();
+        }, i * 150); // Aparecen una tras otra, no todas de golpe
+    }
+}
+
+function crearLuciernaga() {
+    const luciernaga = document.createElement('div');
+    luciernaga.classList.add('luciernaga');
+    
+    // Posición inicial aleatoria por toda la pantalla
+    luciernaga.style.left = Math.random() * 100 + "vw";
+    luciernaga.style.top = Math.random() * 100 + "vh";
+    
+    // Hacemos que parpadeen a diferentes ritmos (super estimulante visualmente)
+    luciernaga.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    
+    document.body.appendChild(luciernaga);
+}
