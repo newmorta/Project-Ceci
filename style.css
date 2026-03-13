@@ -12,6 +12,46 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 0;
+    transition: background 4s ease-in-out;
+}
+
+.escena::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 50%, #171717 100%);
+    opacity: 0; /* Empieza invisible */
+    transition: opacity 5s ease-in-out; /* ¡Aquí está la magia de la suavidad! */
+    z-index: -1;
+}
+
+/* El fondo que aparecerá en el segundo 133 */
+.escena.climax-lover {
+    /* El negro arriba mantiene el contraste, el rosa abajo da el efecto atardecer */
+}
+
+/* Cuando se activa el clímax, la capa se vuelve visible suavemente */
+.escena.climax-lover::before {
+    opacity: 1;
+}
+
+/* Estilo de las Luciérnagas */
+.luciernaga {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ffd700; /* Dorado brillante */
+    border-radius: 50%;
+    /* Efecto de luz resplandeciente */
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.8), 0 0 20px 5px rgba(255, 215, 0, 0.4);
+    animation: flotar-luciernaga 3s infinite alternate ease-in-out;
+    z-index: 5;
+    pointer-events: none; /* Para que no estorben si ella hace clic */
+}
+
+@keyframes flotar-luciernaga {
+    0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+    100% { transform: translateY(-30px) scale(1.5); opacity: 1; }
 }
 
 /* Estrellas */
@@ -176,7 +216,16 @@ body {
     /* Proporciones basadas en el contenedor */
     width: 45%;  
     height: 65%;
-    background: radial-gradient(circle at 50% 10%, var(--accent), var(--accent2));
+    background: radial-gradient(
+        circle at 50% 10%, 
+        #ff85a2 10%, /* Rosa chicle brillante en el centro */
+        #e63946 50%, /* Rojo vivo intermedio */
+        #8b0000 90%  /* Rojo oscuro/vino en los bordes para dar profundidad */
+    );
+    box-shadow: 
+        inset 0 -1vmin 2vmin rgba(0,0,0,0.4), /* Sombra negra suave */
+        inset 0 1vmin 1vmin rgba(255,255,255,0.1), /* Brillo sutil */
+        0 0.5vmin 1vmin rgba(0,0,0,0.2);
     border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
     
     left: 50%;
