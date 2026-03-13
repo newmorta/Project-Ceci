@@ -30,3 +30,35 @@
     for (let i = 0; i < TOTAL_SNOWFLAKES; i++) {
         setTimeout(createSnowflake, i * 200);
     }
+
+// Seleccionamos el botón por su ID único
+const btnVoz = document.getElementById('btn-voz');
+const audioVoz = new Audio('Audio/Felicitacion.mp3');
+
+// Bajamos el volumen al 50% (0.5) o incluso 0.3 si sigue muy fuerte
+audioVoz.volume = 0.2; 
+
+if (btnVoz) {
+    btnVoz.addEventListener('click', () => {
+        // Reiniciamos el audio por si le da clics seguidos (estimulación TDAH)
+        audioVoz.currentTime = 0; 
+        
+        console.log("Reproduciendo con volumen suavizado...");
+        
+        audioVoz.play()
+            .then(() => {
+                console.log("Reproduciendo con éxito");
+            })
+            .catch(error => {
+                console.error("Error al reproducir:", error);
+            });
+            
+        // Efecto visual de pulsación
+        btnVoz.style.transform = "scale(0.9)";
+        btnVoz.style.filter = "brightness(1.5)"; // Brillo extra al presionar
+        setTimeout(() => {
+            btnVoz.style.transform = "scale(1)";
+            btnVoz.style.filter = "brightness(1)";
+        }, 100);
+    });
+}
