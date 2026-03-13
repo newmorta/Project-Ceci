@@ -1,96 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Ceci</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial Black', Gadget, sans-serif;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* EL TRUCO: Contenedor con perspectiva */
+        .elpoderdelcodigo {
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .mensaje {
+            /* Fuente extra gruesa para que se vea la cara */
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+
+            color: transparent;
+            background-image: url('Images/Cecilia.jpg');
+
+            /* Ajustes específicos para su foto */
+            background-size: 110%;
+            /* Menos zoom para que no se pixele */
+            background-position: center 25%;
+            /* Enfoca ojos y rostro */
+            background-attachment: fixed;
+            /* Efecto Parallax: la imagen se queda fija mientras el texto se mueve */
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: focus-face 8s infinite alternate ease-in-out;
+            display: block;
+        }
+
+        @keyframes focus-face {
+            0% {
+                background-position: 45% 25%;
+            }
+
+            100% {
+                background-position: 55% 25%;
+            }
+        }
+
+        /* Botón estilo Neón */
+        .botones {
+            margin-top: 40px;
+            padding: 15px 30px;
+            border: none;
+            font-size: 14px;
+            color: #fff;
+            border-radius: 50px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .botones:hover {
+            box-shadow: 0 0 40px #00ffff;
+            transform: scale(1.05);
+        }
+
+        .snowflake {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
+            animation: fall 10s linear 1;
+            top: -5%;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateX(0) translateY(-10vh) rotate(0deg);
+            }
+
+            50% {
+                transform: translateX(20px) translateY(50vh) rotate(180deg);
+            }
+
+            100% {
+                transform: translateX(-20px) translateY(110vh) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <audio id="musica">
-        <source src="Audio/Lover.mp3" type="audio/mpeg">
-    </audio>
-    <div class="escena">
+    <svg viewBox="0 0 24 24" width="100" height="100" xmlns="http://www.w3.org">
+        <!-- Pétalos exteriores -->
+        <path fill="#FF4D6D"
+            d="M12 2c1 0 3 2 4 4s4 1 4 3-1 4-3 5c2 2 2 5 0 7s-5 1-7-1-5 3-7 1-2-5 0-7c-2-1-3-3-3-5s3-3 4-3 2-4 5-4z"""
+            ) />>
+        <!-- Centro de la flor -->
+        <circle fill="#FFB703" cx="12" cy="12" r="3""" ) />>
+        <!-- Detalle interior -->
+        <path fill="none" stroke="#C9184A" stroke-width="0.5" d="M12 8c2 0 4 2 4 4s-2 4-4 4-4-2-4-4 2-4 4-4""" ) />>
+    </svg>
 
-        <div class="guirnalda">
-            <div class="banderin">C</div>
-            <div class="banderin">E</div>
-            <div class="banderin">C</div>
-            <div class="banderin">I</div>
-            <div class="banderin">L</div>
-            <div class="banderin">I</div>
-            <div class="banderin">A</div>
+    <div class="contenedor-principal">
+        <div class="elpoderdelcodigo">
+            <!-- Dividí el texto para que las letras sean más grandes -->
+            <span class="mensaje">LO QUE PODEMOS CREAR CON LA PROGRAMACIÓN</span>
         </div>
 
-        <div class="space space-1"></div>
-        <div class="space space-2"></div>
-        <div class="space space-3"></div>
-
-        <!-- flowers: reemplaza tu div .petalos por esto -->
-        <div class="flowers-rose" aria-hidden="true">
-
-            <div class="flower" style="--x:-20vw; --y:8vh; --scale:0.9; --accent:#ff5a76; --accent2:#b3003c;">
-                <div class="petalos">
-                    <span class="petalo p1"></span>
-                    <span class="petalo p2"></span>
-                    <span class="petalo p3"></span>
-                    <span class="petalo p4"></span>
-                    <span class="petalo p5"></span>
-                    <span class="petalo p6"></span>
-                </div>
-                <div class="center"></div>
-            </div>
-
-            <div class="flower" style="--x:0vw; --y:2vh; --scale:1; --accent:#ff7aa6; --accent2:#ff456e;">
-                <div class="petalos">
-                    <span class="petalo p1"></span>
-                    <span class="petalo p2"></span>
-                    <span class="petalo p3"></span>
-                    <span class="petalo p4"></span>
-                    <span class="petalo p5"></span>
-                    <span class="petalo p6"></span>
-                    <div class="center"></div>
-                </div>
-                <div class="center"></div>
-            </div>
-
-            <div class="flower" style="--x:20vw; --y:10vh; --scale:0.85; --accent:#ff4d6d; --accent2:#b3003c;">
-                <div class="petalos">
-                    <span class="petalo p1"></span>
-                    <span class="petalo p2"></span>
-                    <span class="petalo p3"></span>
-                    <span class="petalo p4"></span>
-                    <span class="petalo p5"></span>
-                    <span class="petalo p6"></span>
-                    <div class="center"></div>
-                </div>
-                <div class="center"></div>
-            </div>
-
-        </div>
-
-        <div class="contenedor">
-            <span class="mensaje"></span>
-        </div>
-
-        <div class="carta">
-            <div class="sobre"></div>
-            <div class="contenido">
-                <p>Querida Cecilia,</p>
-                <p>Me pediste que te escribiera algo por WhatsApp, pero las palabras en un chat se pierden entre tantos mensajes. Como sé que esta canción es especial para ti, sentí que lo mínimo que podía hacer era construirte un lugar que estuviera a la altura de tu día.</p>
-                <p>Quizás no hablemos todo el tiempo, pero quiero que sepas que me importa lo suficiente como para dedicarle horas a que cada detalle de esta web se viera bien para ti. Programar es mi forma de decir las cosas, y hoy mi código dice que espero que este año sea el mejor que hayas tenido. Que cada meta que te propongas cargue sin errores, que tu vida tenga el mejor ritmo y que nunca te falte una razón para sonreír.</p>
-                <p>Feliz cumpleaños, Ceci. Gracias por dejarme ser parte de tu día de esta manera.</p>
-                <p>- JAGC</p>
-            </div>
-        </div>
-
-        <button class="boton-carta">📩 Carta</button>
-
+        <a href="main.html" class="botones">ABRIR</a>
     </div>
 
-    <script src="script.js"></script>
+    <audio autoplay loop>
+        <source src="Audio/Lover.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="showflake.js"></script>
 
 </body>
 
