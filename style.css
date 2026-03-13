@@ -43,32 +43,83 @@ body {
     line-height: 0.85;
     text-transform: uppercase;
     letter-spacing: -2px;
+    position: relative;
+    display: block;
+    width: 100%;
+    
+    /* IMAGEN: Ajuste específico para su rostro en la foto */
     background-image: url('Images/Cecilia.jpg');
-    background-size: cover;
-    background-position: center 20%;
+    background-size: 140%; 
+    background-position: 50% 15%; /* Enfoca ojos y frente */
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    display: block;
-    width: 100%;
+    
+    /* Sutil resplandor para dar profundidad */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+    
     will-change: transform;
     transition: all 0.5s ease-in-out;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    
+    /* Animación de movimiento suave */
+    animation: enfoque-rostro 8s infinite alternate ease-in-out;
 }
+
+/* Efecto de Brillo que recorre las letras */
+.mensaje::before {
+    content: "LO QUE PODEMOS CREAR CON LA PROGRAMACIÓN";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg, 
+        transparent 30%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 70%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: brillo-letras 5s infinite;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Animaciones */
+@keyframes enfoque-rostro {
+    0% { background-position: 50% 15%; }
+    100% { background-position: 55% 20%; }
+}
+
+@keyframes brillo-letras {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Ajuste para Celulares (Vertical) */
+@media (max-width: 600px) {
+    .mensaje {
+        background-size: 250%; /* Más zoom en móvil para que el rostro llene las letras */
+        background-position: center 15%;
+    }
+}
+
 
 /* Contenedor General de Flores */
 .flowers-rose {
     position: absolute;
     left: 50%;
-    top: 80%; /* Ajustado para que no tapen el texto */
+    top: 75%; 
     transform: translate(-50%, -50%);
     pointer-events: none; 
     z-index: 1;
     width: 100%;
-    height: 300px;
+    height: 40vh; /* Altura basada en el 40% de la pantalla */
 }
-
 .flower {
     position: absolute;
     left: calc(50% + var(--x, 0));
@@ -109,53 +160,76 @@ body {
 }
 
 /* Pétalos */
+/* Pétalos Mejorados */
 .petalos {
     position: relative;
-    width: 160px;
-    height: 160px;
+    /* Usamos vmin para que se adapte al tamaño de la pantalla */
+    width: 25vmin; 
+    height: 25vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .petalo {
     position: absolute;
-    width: 86px;
-    height: 110px;
-    border-radius: 55% 55% 45% 45%;
-    transform-origin: 50% 90% !important; /* Punto de unión en la base */
-    transform: scale(0.2) rotate(0deg);
-    background: radial-gradient(circle at 30% 25%, var(--accent, #ff6b81), var(--accent2, #b3003c));
-    /* Profundidad mejorada */
-    box-shadow: inset 0 -15px 20px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.3);
-    border: 1px solid rgba(0,0,0,0.1);
-    transition: transform 900ms cubic-bezier(.2,.9,.2,1);
+    /* Proporciones basadas en el contenedor */
+    width: 45%;  
+    height: 65%;
+    background: radial-gradient(circle at 50% 10%, var(--accent), var(--accent2));
+    border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+    
+    left: 50%;
+    top: 50%;
+    /* Centrado dinámico */
+    margin-left: -22.5%; 
+    margin-top: -60%;  
+    
+    transform-origin: bottom center; 
+    transform: rotate(0deg) scale(0);
+    opacity: 0;
+    
+    box-shadow: inset 0 -1vmin 1.5vmin rgba(0,0,0,0.2), 0 0.5vmin 1vmin rgba(0,0,0,0.1);
+    transition: transform 0.8s cubic-bezier(.17,.67,.41,1.18), opacity 0.5s;
 }
 
 .flower.open .petalo {
+    opacity: 1;
+    /* Usamos la rotación individual */
     transform: rotate(var(--rot)) scale(1);
 }
 
 /* Posiciones de los pétalos corregidas para forma de rosa */
-.p1 { left: 35px; top: 10px; --rot: -45deg; transition-delay: 0.05s; }
-.p2 { left: 45px; top: 5px;  --rot: -15deg; transition-delay: 0.15s; }
-.p3 { left: 60px; top: 5px;  --rot: 15deg;  transition-delay: 0.25s; }
-.p4 { left: 75px; top: 10px; --rot: 45deg;  transition-delay: 0.35s; }
-.p5 { left: 40px; top: 20px; --rot: 180deg; z-index: -1; transition-delay: 0.45s; } 
-.p6 { left: 70px; top: 20px; --rot: 200deg; z-index: -1; transition-delay: 0.55s; }
+/* Distribución Circular de los Pétalos */
+.p1 { --rot: 0deg;   transition-delay: 0.1s; }
+.p2 { --rot: 60deg;  transition-delay: 0.2s; }
+.p3 { --rot: 120deg; transition-delay: 0.3s; }
+.p4 { --rot: 180deg; transition-delay: 0.4s; }
+.p5 { --rot: 240deg; transition-delay: 0.5s; }
+.p6 { --rot: 300deg; transition-delay: 0.6s; }
+/* Si tienes más pétalos (como en la tercera flor) */
+.p7 { --rot: 30deg;  transition-delay: 0.7s; }
+.p8 { --rot: 210deg; transition-delay: 0.8s; }
+
 
 /* Centro de la rosa (Bola Amarilla) */
 .center {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 6vmin; /* Escalado automático */
+    height: 6vmin;
     left: 50%;
-    top: 80%; /* Alineado con la base de los pétalos */
+    top: 50%; 
     transform: translate(-50%, -50%) scale(0);
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, #ffd166, #ffb347);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: transform 0.5s cubic-bezier(.2,.9,.2,1) 0.5s;
     z-index: 10;
+    transition: transform 0.5s ease-out 0.8s;
 }
 
+.flower.open .center {
+    /* Asegúrate de repetir el translate aquí para que no se mueva al escalar */
+    transform: translate(-50%, -50%) scale(1);
+}
 .flower.open .center {
     transform: translate(-50%, -50%) scale(1);
 }
