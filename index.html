@@ -63,12 +63,15 @@
             }
         }
 
-        /* Botón estilo Neón */
+        /* Botón estilo Neón Escalable */
         .botones {
-            margin-top: 40px;
-            padding: 15px 30px;
+            margin-top: 2vh;
+            /* Distancia basada en el alto de pantalla, no en px */
+            padding: 0.8em 2em;
+            /* Padding relativo al tamaño del texto */
             border: none;
-            font-size: 14px;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            /* El botón ahora también se escala solo */
             color: #fff;
             border-radius: 50px;
             letter-spacing: 2px;
@@ -79,11 +82,14 @@
             transition: 0.3s;
             cursor: pointer;
             text-decoration: none;
+            display: inline-block;
+            /* Asegura que respete márgenes correctamente */
         }
 
         .botones:hover {
             box-shadow: 0 0 40px #00ffff;
-            transform: scale(1.05);
+            transform: scale(1.1);
+            /* Un poco más de feedback visual al pasar el mouse */
         }
 
         .snowflake {
@@ -110,6 +116,10 @@
             }
         }
     </style>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
 </head>
 
 <body>
@@ -131,11 +141,8 @@
         </div>
 
         <a href="main.html" class="botones">ABRIR</a>
+        <!-- <a class="botones" id="btn-voz" style="cursor: pointer;">FELICITACIÓN</a> -->
     </div>
-
-    <audio autoplay loop>
-        <source src="Audio/Lover.mp3" type="audio/mpeg">
-    </audio>
 
     <script src="showflake.js"></script>
 
